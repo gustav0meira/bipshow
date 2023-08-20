@@ -1,0 +1,17 @@
+:root {
+
+  /* cores */
+  --primary: #4A3D90;
+  --secondary: #39474F;
+  --tertiary: #05B49D;
+
+  /* backgrounds */
+  --background: #FFFFFF;
+  --background-red: red;
+  --gray-background: #F6F6F6;
+
+  /* gradients */
+  --gradient: linear-gradient(90deg, rgba(149,106,251,1) 0%, rgba(83,175,237,1) 100%);
+  --action-gradient: linear-gradient(135deg, #956AFB 0%, #53AFED 100%);
+
+}
