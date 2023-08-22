@@ -109,6 +109,34 @@ div.search input::placeholder{
 	border-radius: 20px;
 	font-size: 0.8rem !important;
 }
+.dropdown-profile{
+	padding: 15px 0px;
+	border-radius: 20px;
+	font-size: 0.8rem !important;
+}
+.dropdown-profile a{
+	text-decoration: none !important;
+}
+.dropdown-profile li{
+	padding: 5px 14px;
+	cursor: pointer;
+	transition: all 200ms;
+	border-left: 4px solid #00000000;
+}
+.dropdown-profile li:hover{
+	border-left: 4px solid #828ff4;
+}
+li.dropdown-item svg{
+	margin-right: 5px;
+	color: #828ff4;
+}
+.dropdown-item:active{
+	background: #828ff4 !important;
+}
+.dropdown-item:active svg{
+	color: white !important;
+	border-color: white !important;
+}
 .dropdown-entrar input{
 	width: 100%;
 	padding: 10px 15px;
@@ -138,6 +166,13 @@ label.input{
 	margin-top: 10px;
 	color: #8782f8;
 }
+.profile_pp{
+	width: 40px;
+	height: 40px;
+	background-size: cover !important;
+	background-position: center center !important;
+	border-radius: 15px;
+}
 </style>
 
 <div class="container-fluid topbar">
@@ -145,7 +180,7 @@ label.input{
 		<div class="row">
 			<div class="col-2">
 				<div class="align">
-					<a href="?logoTopbar=true">
+					<a href="<?php echo route(''); ?>?logoTopbar=true">
 						<img class="topLogo" src="assets/logo/topbar.png">
 					</a>
 				</div>
@@ -163,7 +198,15 @@ label.input{
 								<div style="text-align: left !important;" class="col-10">
 									<div class="align">
 										<label style="cursor: pointer;" class="topTitle">Eventos próximos à</label><br>
-										<label style="cursor: pointer;" class="bottomTitle dropdown-toggle"><?php echo getUserLocation(); ?></label>
+										<label style="cursor: pointer;" class="bottomTitle dropdown-toggle">
+											<?php 
+												if (isset($_SESSION['location']->localidade) AND isset($_SESSION['location']->uf)) { 
+													echo $_SESSION['location']->localidade . ', ' . $_SESSION['location']->uf;
+												} else { 
+													echo getUserLocation();
+												} 
+											?>
+										</label>
 									</div>
 								</div>
 							</div>
@@ -171,10 +214,11 @@ label.input{
 						  <ul class="dropdown-menu">
 						  	<p>para ver os melhores fretes e prazos para sua região</p>
 						  	<p>insira o seu cep:</p>
-						  	<form method="POST" action="<?php echo route('newRoute'); ?>">
+						  	<form method="POST" action="/cep">
 							  	<div class="row">
 							  		<div style="padding: 0px 3px 0px 12px;" class="col-9">
-							  			<input id="cep" maxlength="9" minlength="9" placeholder="_____-___" class="cep" type="text" name="cep" value="<?php echo getUserCep(); ?>">
+							  			<input id="cep" maxlength="9" minlength="9" placeholder="_____-___" class="cep" type="text" name="cep" 
+							  			value="<?php if(isset($_SESSION['location']->cep)) { echo $_SESSION['location']->cep; } else { if ($_SERVER['REMOTE_ADDR'] == '::1') { echo '00000-000'; } else { echo getUserCep(); } } ?>">
 							  		</div>
 							  		<div style="padding: 0px 12px 0px 3px;" class="col-3">
 							  			<button class="cep">ok</button>
@@ -189,15 +233,38 @@ label.input{
 			<div class="col-4">
 				<div class="align">
 					<div class="search">
-						<form style="margin: 0px !important;" method="POST" action="<?php echo route('search'); ?>">
+						<form style="margin: 0px !important;" method="POST" action="./pesquisa">
 							<button class="no_button">
 								<i class="fa-solid fa-magnifying-glass"></i>
 							</button>
-							<input placeholder="Pesquise seu evento" class="search" type="search" name="search">
+							<input value="<?php if (isset($_POST['search'])) { echo $_POST['search']; } ?>" placeholder="Pesquise seu evento" class="search" type="search" name="search">
 						</form>
 					</div>
 				</div>
 			</div>
+			<?php 
+			if (isset($_SESSION['user'])) { ?>
+			<div class="col-3">
+				<div class="align">
+					<div class="row">
+						<div class="col-sm">
+							<a href="<?php echo route('meus-ingressos'); ?>"><button style="width: 109% !important;" class="gradient">Meus ingressos</button></a>
+						</div>
+						<div style="text-align: right !important;" class="col-3">
+							<div class="dropdown-center">
+							  <button class="no_button" data-bs-toggle="dropdown" aria-expanded="false">
+								<div style="float: right; background: url('data/pp/<?php echo $_SESSION['user']['profile_pp'] ?>');" class="profile_pp"></div>
+							  </button>
+							  <ul class="dropdown-menu dropdown-profile">
+							  	<a href="<?php echo route('minha-conta'); ?>"><li class="dropdown-item"><i class="fa-regular fa-circle-user"></i> Meu Perfil</li></a>
+							  	<a href="<?php echo route('logout'); ?>"><li class="dropdown-item"><i class="fa-regular fa-circle-xmark"></i> Sair</li></a>
+							  </ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php } else { ?>
 			<div class="col-3">
 				<div class="align">
 					<div class="row">
@@ -206,7 +273,7 @@ label.input{
 							  <button class="white" data-bs-toggle="dropdown" aria-expanded="false">Entrar</button>
 							  <ul class="dropdown-menu dropdown-entrar">
 							  	<p>faça login para acessar todos os recursos da plataforma</p>
-							  	<form method="POST" action="<?php echo route('entrar'); ?>">
+							  	<form method="POST" action="./entrar">
 							  		<label class="input">E-mail</label>
 							  		<input required placeholder="seu e-mail aqui..." type="email" name="email">
 							  		<label class="input">Senha</label>
@@ -218,11 +285,12 @@ label.input{
 							</div>
 						</div>
 						<div class="col-sm">
-							<a href="<?php echo route('register'); ?>"><button class="gradient">Criar Conta</button></a>
+							<a href="./register"><button class="gradient">Criar Conta</button></a>
 						</div>
 					</div>
 				</div>
 			</div>
+			<?php } ?>
 		</div>
 	</div>
 </div>

@@ -138,7 +138,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<p class="copy_thecircle">Sistema desenvolvido com muito ☕ por The Circle</p>
+				<p class="copy_thecircle">Desenvolvido com muito ☕ por The Circle</p>
 			</div>
 		</div>
 	</div>

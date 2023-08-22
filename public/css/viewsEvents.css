@@ -1,0 +1,9 @@
+.event_banner{
+	width: 100%;
+	margin-top: 15px;
+	padding-bottom: 300px;
+	border-radius: 15px;
+	margin-bottom: 20px;
+	background-size: cover !important;
+	background-position: center center !important;
+}

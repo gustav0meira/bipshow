@@ -1,0 +1,53 @@
+#register input{
+	padding: 13px 20px;
+	width: 100%;
+	font-size: 0.8rem !important;
+	border-radius: 25px;
+	margin-bottom: 10px;
+	border: 1px solid #00000030;
+}
+
+#register input::placeholder{
+	color: #00000080;
+}
+
+button.gradient{
+	width: 100%;
+	padding: 13px;
+	color: white;
+	background: var(--gradient);
+	border-radius: 25px;
+	border: none;
+}
+
+h1.gradient{
+	color: #8b6ef9;
+	border-radius: 15px;
+	text-align: center;
+}
+
+p.register{
+	text-align: center;
+	width: 80%;
+	font-family: Inter;
+	font-size: 0.8rem !important;
+	color: #00000090;
+}
+
+label.terms{
+	font-size: 0.6rem !important;
+	cursor: pointer;
+	color: #00000099;
+}
+
+button.white{
+	width: 100% !important;
+	font-family: Poppins !important;
+	font-size: 13px !important;
+	border-radius: 25px;
+	border: 1px solid #E3E3E3;
+	font-weight: 500;
+	background: transparent;
+	color: #39474F;
+	padding: 12px 27px;
+}

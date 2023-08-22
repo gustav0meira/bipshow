@@ -1,1 +1,1 @@
-<?php $conn = new mysqli('', '', '', ''); ?>
+<?php $conn = new mysqli('thecircle.com.br', 'u868458939_bipshow', 'x0CoPgumLT!', 'u868458939_bipshow'); ?>
