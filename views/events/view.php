@@ -1,3 +1,5 @@
+<title><?php if ($url == '') { echo 'Início'; } else { echo ucwords(substr(str_replace('-', ' ', $url), 0, -2)); }; ?> | <?php echo 'BipShow'; ?></title>
+
 <?php 
 
 session_start();
@@ -33,41 +35,113 @@ while ($data = mysqli_fetch_array($mysqli_query)) { $event = $data; }
 </head>
 <body>
 <?php if (isMobileDevice()) { require "../app/topbar_mobile.php"; } else { require "../app/topbar.php"; } ?>
-	<div style="padding-top: 70px; padding-bottom: 20px;" class="container">
+	<div style="padding-top: 30px; padding-bottom: 20px;" class="container">
 		<div class="row">
 			<div class="col-12">
-				<i class="fa-solid fa-angle-left fa-xs"></i> Voltar
+				<label onclick="window.history.back();" style="cursor: pointer;"><i class="fa-solid fa-angle-left fa-xs"></i> Voltar</label>
 			</div>
 			<div class="col-12">
 				<div style="background: url('data/banner_events/<?php echo $event['banner']; ?>');" class="event_banner"></div>
 			</div>
-			<div class="col-8">
-				<p>Talent Show</p>
-				<p>
-					Florianópolis, SC - Teatro Carlos Gomes <br>
-					22:00 <br>
-					18 de Julho de 2023
-				</p>
-				<button>Como chegar</button>
-				<button>Adicionar na agenda</button>
-				<button>Compartilhar</button>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-8">
+						<p class="b_title">Talent Show</p>
+						<p>
+							<?php echo $event['city'] . ', ' . $event['uf'] . ' - ' . $event['local'] ?> <br>
+							<?php echo dateHour($event['event_data']); ?> <br>
+							<?php echo fullMonth($event['event_data']); ?>
 
-				<p>Informações gerais</p>
-				<hr>
+							<?php 
 
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum in purus non facilisis. Morbi laoreet varius dolor, in sagittis ipsum ultricies eget. Nulla pretium pretium mi eu gravida. Donec accumsan tempus imperdiet. Proin eget tincidunt metus, at fermentum diam. Aliquam laoreet consectetur leo, at volutpat eros consectetur non. Proin a lorem eu dolor elementum pulvinar. Phasellus sit amet lorem bibendum, posuere est eget, efficitur dui.
+								// como chegar
+								$local = $event['local'];
+								$cidade = $event['city'];
+								$uf = $event['uf'];
 
-					Ut lobortis ipsum a rutrum hendrerit. Cras suscipit, arcu ac luctus tempus, metus elit placerat est, nec dictum mauris odio et lorem. Vivamus pharetra metus accumsan augue egestas, sit amet consectetur enim aliquet. Cras id ex hendrerit, luctus risus in, maximus lectus. Donec tincidunt elementum mauris. Nunc congue condimentum nibh non maximus. Proin ipsum ligula, auctor eget turpis consequat, posuere pulvinar urna. Nunc consectetur tortor purus, vel lobortis lacus ultrices eu. Aliquam eu ex ac leo feugiat eleifend vel id nibh. Fusce vel placerat quam. Mauris feugiat congue mollis. Nullam congue mauris quis nibh hendrerit mollis.
-				</p>
+								// adicionar na agenda
+						        $tituloEvento = $event['title'];
+						        $dataInicio = date('c', strtotime($event['event_data']));
+						        $dataFim = date('c', strtotime($event['event_data']));
+						        $descricao = $event['description'];
+						        $local = $event['city'] . ', ' . $event['uf'] . ' - ' . $event['local'];
 
-				<div class="rulesBox">
-					<p>Regras da compra online e acesso digital</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum in purus non facilisis. Morbi laoreet varius dolor, in sagittis ipsum ultricies eget. Nulla pretium pretium mi eu gravida. Donec accumsan tempus imperdiet. Proin eget tincidunt metus, at fermentum diam. Aliquam laoreet consectetur leo, at volutpat eros consectetur non. Proin a lorem eu dolor elementum pulvinar. Phasellus sit amet lorem bibendum, posuere est eget, efficitur dui.</p>
+							?>
+
+						</p>
+
+						<a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo urlencode($local . ', ' . $cidade . ', ' . $uf); ?>" target="_blank"><button class="act">
+							<i class="fa-regular fa-compass"></i> 
+							Como chegar
+						</button></a>
+						<a href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($tituloEvento); ?>&dates=<?php echo urlencode($dataInicio . '/' . $dataFim); ?>&details=<?php echo urlencode($descricao . '\nLocal: ' . $local); ?>" target="_blank"><button class="act">
+							<i class="fa-regular fa-calendar"></i> 
+							Adicionar na agenda
+						</button></a>
+						<a><button id="shareButton" class="act">
+							<i class="fa-regular fa-share-from-square"></i> 
+							Compartilhar
+						</button></a>
+
+						<p style="margin-top: 30px;" class="b">Informações gerais</p>
+						<hr width="10%" style="border-color: #00000030;">
+
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vestibulum in purus non facilisis. Morbi laoreet varius dolor, in sagittis ipsum ultricies eget. Nulla pretium pretium mi eu gravida. Donec accumsan tempus imperdiet. Proin eget tincidunt metus, at fermentum diam. Aliquam laoreet consectetur leo, at volutpat eros consectetur non. Proin a lorem eu dolor elementum pulvinar. Phasellus sit amet lorem bibendum, posuere est eget, efficitur dui.
+							<br>
+							<br>
+							Ut lobortis ipsum a rutrum hendrerit. Cras suscipit, arcu ac luctus tempus, metus elit placerat est, nec dictum mauris odio et lorem. Vivamus pharetra metus accumsan augue egestas, sit amet consectetur enim aliquet. Cras id ex hendrerit, luctus risus in, maximus lectus. Donec tincidunt elementum mauris. Nunc congue condimentum nibh non maximus. Proin ipsum ligula, auctor eget turpis consequat, posuere pulvinar urna. Nunc consectetur tortor purus, vel lobortis lacus ultrices eu. Aliquam eu ex ac leo feugiat eleifend vel id nibh. Fusce vel placerat quam. Mauris feugiat congue mollis. Nullam congue mauris quis nibh hendrerit mollis.
+						</p>
+
+						<div style="text-align: justify;" class="rulesBox">
+							<p class="b">Regras da compra online e acesso digital</p>
+							<p><?php echo $config['purchase_rules']; ?></p>
+						</div>
+					</div>
+					<div style="position: relative !important;" class="col-4">
+						<div class="ticketBox">
+							
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 <?php require "../app/footer.php"; ?>
 </body>
+<script>
+	$(document).ready(function() {
+	  $(window).scroll(function() {
+	    var col4Width = $('.col-4').width();
+	    $('.ticketBox').css('width', col4Width + 'px !important;');
+	  });
+	});
+</script>
+<script>
+    document.getElementById('shareButton').addEventListener('click', function() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Título do Compartilhamento',
+                text: 'Texto para compartilhar',
+                url: window.location.href
+            })
+            .then(() => console.log('Compartilhado com sucesso'))
+            .catch((error) => console.error('Erro ao compartilhar', error));
+        } else {
+            // Caso a API Web Share não seja suportada, abrir links diretos
+            var sharedURL = encodeURIComponent(window.location.href);
+            window.open(
+                'https://wa.me/?text=' + sharedURL,
+                'whatsapp-share',
+                'width=600,height=400'
+            );
+            window.open(
+                'https://www.facebook.com/sharer/sharer.php?u=' + sharedURL,
+                'facebook-share',
+                'width=600,height=400'
+            );
+            // Adicione mais links para outras plataformas de compartilhamento aqui
+        }
+    });
+</script>
 </html>

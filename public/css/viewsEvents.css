@@ -1,3 +1,7 @@
+body{
+	font-family: Inter !important;
+}
+
 .event_banner{
 	width: 100%;
 	margin-top: 15px;
@@ -6,4 +10,45 @@
 	margin-bottom: 20px;
 	background-size: cover !important;
 	background-position: center center !important;
+}
+
+.rulesBox{
+	margin-top: 25px;
+	padding: 15px 20px !important;
+	border-radius: 15px;
+	color: #39474F;
+	background: #eeebf8;
+}
+
+p.b{
+	font-weight: 500;
+	font-size: 0.9rem !important;
+}
+
+p.b_title{
+	font-size: 1.5rem !important;
+	color: #39474F;
+	font-weight: 600;
+}
+
+button.act{
+	margin-top: 10px;
+	border: 2px solid #4B16C9;
+	color: #4B16C9;
+	padding: 10px 20px;
+	margin-right: 10px;
+	border-radius: 25px;
+	background: transparent;
+}
+
+button.act svg{
+	margin-right: 5px;
+}
+
+.ticketBox{
+	width: 100%;
+	padding: 25px;
+	border-radius: 25px;
+	border: 2px solid #6b95f250;
+	margin-top: 8px !important;
 }

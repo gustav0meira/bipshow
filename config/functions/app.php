@@ -19,4 +19,30 @@
 	    return preg_match("/(android|blackberry|iphone|ipod|palm|pocket|symbian|windows ce|windows phone|mobile)/i", $_SERVER["HTTP_USER_AGENT"]);
 	}
 
+	function dateHour($hour) {
+		return date('h:i', strtotime($hour));
+	}
+
+	function fullMonth($event_data) {
+	    $event_timestamp = strtotime($event_data);
+
+	    $meses = array(
+	        1 => 'Janeiro',
+	        2 => 'Fevereiro',
+	        3 => 'Março',
+	        4 => 'Abril',
+	        5 => 'Maio',
+	        6 => 'Junho',
+	        7 => 'Julho',
+	        8 => 'Agosto',
+	        9 => 'Setembro',
+	        10 => 'Outubro',
+	        11 => 'Novembro',
+	        12 => 'Dezembro'
+	    );
+
+	    $format = date('d \d\e ', $event_timestamp) . $meses[date('n', $event_timestamp)] . date(' \d\e Y', $event_timestamp);
+	    return $format;
+	}
+
 ?>
