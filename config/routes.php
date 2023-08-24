@@ -11,6 +11,7 @@ $routes = [
     'pesquisa' => 'views/home/search.php',
     // configs
     'cep' => 'config/actions/newCep.php',
+    'api-cpf' => 'config/api/cpf_receita.php',
     // eventos
     'eventos' => 'views/events/index.php',
     // auth

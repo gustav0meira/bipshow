@@ -45,4 +45,47 @@
 	    return $format;
 	}
 
+	function dayToName($dataHora) {
+	    $timestamp = strtotime($dataHora);
+	    $nomeDia = date('l', $timestamp);
+	    switch ($nomeDia) {
+	        case 'Monday':
+	            return 'Segunda';
+	        case 'Tuesday':
+	            return 'Terça';
+	        case 'Wednesday':
+	            return 'Quarta';
+	        case 'Thursday':
+	            return 'Quinta';
+	        case 'Friday':
+	            return 'Sexta';
+	        case 'Saturday':
+	            return 'Sábado';
+	        case 'Sunday':
+	            return 'Domingo';
+	        default:
+	            return 'Dia inválido';
+	    }
+	}
+
+	function monthToPT($nomeMesAbreviado) {
+	    $nomesMeses = array(
+	        'Jan' => 'Jan',
+	        'Feb' => 'Fev',
+	        'Mar' => 'Mar',
+	        'Apr' => 'Abr',
+	        'May' => 'Mai',
+	        'Jun' => 'Jun',
+	        'Jul' => 'Jul',
+	        'Aug' => 'Ago',
+	        'Sep' => 'Set',
+	        'Oct' => 'Out',
+	        'Nov' => 'Nov',
+	        'Dec' => 'Dez'
+	    );
+
+	    return $nomesMeses[$nomeMesAbreviado];
+	}
+
+
 ?>

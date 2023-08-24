@@ -7,7 +7,7 @@ body{
 	margin-top: 15px;
 	padding-bottom: 300px;
 	border-radius: 15px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	background-size: cover !important;
 	background-position: center center !important;
 }
@@ -51,4 +51,60 @@ button.act svg{
 	border-radius: 25px;
 	border: 2px solid #6b95f250;
 	margin-top: 8px !important;
+}
+
+.ticketBox .top{
+	padding-bottom: 15px;
+	border-bottom: 1px solid #39474F10;
+}
+
+.top svg{
+	font-size: 1.3rem !important;
+	color: #4B16C9 !important;
+}
+
+.top .ticketLabel{
+	margin-left: 3px;
+	font-weight: 500;
+	color: #4B16C9;
+	font-size: 1rem !important;
+}
+
+.ticketDay{
+	cursor: pointer;
+	padding: 10px 0px;
+	border-bottom: 1px solid #39474F10;
+}
+
+.ticketDay .day{
+	color: #39474F;
+	font-size: 2.5rem !important;	
+	font-weight: 700;
+}
+
+.ticketDay .month{
+	color: #39474F;
+	font-weight: 500;
+	font-size: 1rem !important;
+}
+
+.ticketDay .extenseDay{
+	color: #39474F;
+	font-weight: 300 !important;
+	font-size: 0.6rem !important;
+}
+
+.prieceDescription{
+	font-weight: 400;
+	line-height: 1.3;
+	font-size: 0.6rem !important;
+}
+
+.prieceDescription b{
+	font-weight: 600 !important;
+	font-size: 0.8rem !important;
+}
+
+.ticketDay .fa-chevron-right{
+	color: #53AEEC70 !important;
 }

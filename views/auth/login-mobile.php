@@ -13,6 +13,14 @@ require "../config/functions/app.php";
 
 ?>
 
+<script>
+function formatCPF_CNPJ(input) {
+    const cleanInput = input.replace(/\D/g, '');
+    return cleanInput.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    return input;
+}
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +47,8 @@ require "../config/functions/app.php";
 					<p class="register">Faça login e tenha acesso a todas as opções disponíveis em nossa plataforma de venda de ingressos.</p>
 				</center>
 				<form method="POST" action="./entrar">
-					<label class="input">E-mail</label>
-					<input required placeholder="Insira o seu e-mail" type="text" name="email"><br>
+					<label class="input">CPF</label>
+					<input required oninput="this.value = formatCPF_CNPJ(this.value)" maxlength="14" placeholder="Insira o seu CPF" type="text" name="email"><br>
 
 					<label class="input">Senha</label>
 					<input required placeholder="Insira a sua senha" type="password" name="password"><br>

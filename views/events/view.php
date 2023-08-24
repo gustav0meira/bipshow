@@ -46,7 +46,7 @@ while ($data = mysqli_fetch_array($mysqli_query)) { $event = $data; }
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-8">
-						<p class="b_title">Talent Show</p>
+						<p class="b_title"><?php echo $event['title']; ?></p>
 						<p>
 							<?php echo $event['city'] . ', ' . $event['uf'] . ' - ' . $event['local'] ?> <br>
 							<?php echo dateHour($event['event_data']); ?> <br>
@@ -100,7 +100,62 @@ while ($data = mysqli_fetch_array($mysqli_query)) { $event = $data; }
 					</div>
 					<div style="position: relative !important;" class="col-4">
 						<div class="ticketBox">
-							
+							<div class="">
+								<div class="row ticket_dateBox">
+									<div class="col-12 top">
+										<div class="row">
+											<div class="col-1">
+												<i class="fa-solid fa-ticket align"></i> 
+											</div>
+											<div class="col-11">
+												<div class="align">
+													<label class="ticketLabel">Ingressos</label>
+												</div>	
+											</div>
+										</div>
+									</div>
+									<?php if (isset($_GET['day'])) {
+										// code...
+									} else {  ?>
+									<div class="col-12">
+										<?php $days = json_decode($event['days']);
+										foreach ($days as $day) {
+
+											$day = strtotime($day);
+											$n_day = date('d', $day);
+											$month = strtoupper(monthToPT(date('M', $day)));
+											$t_day = dayToName($day);
+
+										?>
+										<div onclick="window.location.href='?event=<?php print_r($id); ?>&day=<?php echo $day; ?>'" class="row ticketDay">
+											<div class="col-2">
+												<label class="day"><?php echo $n_day; ?></label>
+											</div>
+											<div style="padding-left: 5px;" class="col-2">
+												<div class="align">
+													<label class="month"><?php echo $month; ?></label><br>
+													<label class="extenseDay"><?php echo $t_day; ?></label>
+												</div>
+											</div>
+											<div class="col-7">
+												<div class="align">
+													<p class="prieceDescription">
+														Preços entre <br>
+														<b>R$ 400,00 e 500,00</b>
+													</p>
+												</div>
+											</div>
+											<div class="col-1">
+												<div class="align">
+													<i class="fa-solid fa-chevron-right fa-2xl"></i>
+												</div>
+											</div>
+										</div>
+										<?php } ?>
+									</div>
+									<?php } ?>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -109,14 +164,6 @@ while ($data = mysqli_fetch_array($mysqli_query)) { $event = $data; }
 	</div>
 <?php require "../app/footer.php"; ?>
 </body>
-<script>
-	$(document).ready(function() {
-	  $(window).scroll(function() {
-	    var col4Width = $('.col-4').width();
-	    $('.ticketBox').css('width', col4Width + 'px !important;');
-	  });
-	});
-</script>
 <script>
     document.getElementById('shareButton').addEventListener('click', function() {
         if (navigator.share) {

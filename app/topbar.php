@@ -154,7 +154,7 @@ label.input{
 	margin-bottom: -7px;
 	background: white !important;
 	padding: 0px 5px;
-	margin-left: 15px;
+	margin-left: 10px;
 	font-size: 0.5rem !important;
 	color: #00000095;
 }
@@ -174,7 +174,13 @@ label.input{
 	border-radius: 15px;
 }
 </style>
-
+<script>
+function formatCPF_CNPJ(input) {
+    const cleanInput = input.replace(/\D/g, '');
+    return cleanInput.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    return input;
+}
+</script>
 <div class="container-fluid topbar">
 	<div class="container">
 		<div class="row">
@@ -274,8 +280,8 @@ label.input{
 							  <ul class="dropdown-menu dropdown-entrar">
 							  	<p>faça login para acessar todos os recursos da plataforma</p>
 							  	<form method="POST" action="./entrar">
-							  		<label class="input">E-mail</label>
-							  		<input required placeholder="seu e-mail aqui..." type="email" name="email">
+							  		<label class="input">CPF</label>
+							  		<input required oninput="this.value = formatCPF_CNPJ(this.value)" maxlength="14" placeholder="seu CPF aqui..." type="text" name="cpf">
 							  		<label class="input">Senha</label>
 							  		<input required placeholder="sua senha aqui..." type="password" name="password">
 							  		<button class="gradient">ENTRAR</button>
